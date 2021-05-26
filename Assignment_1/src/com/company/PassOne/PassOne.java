@@ -145,6 +145,8 @@ public class PassOne {
                         literalTable.get(j).setAddress(locCounter);
                         ++locCounter;
                     }
+                    poolTable_pnt++;
+                    poolTable.add(literalTable_pnt);
                 }
                 sb.append(lookUp.getCode(parts[1]));
             }
