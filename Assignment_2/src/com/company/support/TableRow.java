@@ -2,7 +2,7 @@ package com.company.support;
 
 public class TableRow {
     private final String symbol;
-    private int address;
+    private final int address;
     private final int index;
 
     public TableRow(String symbol, int address, int index) {

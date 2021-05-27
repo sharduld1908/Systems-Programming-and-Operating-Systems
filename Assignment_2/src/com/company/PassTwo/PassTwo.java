@@ -10,12 +10,10 @@ import java.util.ArrayList;
 public class PassTwo {
     private final ArrayList<TableRow> symbolTable;
     private final ArrayList<TableRow> literalTable;
-    private final ArrayList<Integer> poolTable;
 
     public PassTwo() throws IOException {
         symbolTable = new ArrayList<>();
         literalTable = new ArrayList<>();
-        poolTable = new ArrayList<>();
 
         String line;
         BufferedReader br = new BufferedReader(new FileReader("SymbolTable.txt"));
@@ -30,58 +28,47 @@ public class PassTwo {
             literalTable.add(new TableRow(parts[1],Integer.parseInt(parts[2]),Integer.parseInt(parts[0])));
         }
 
-        br = new BufferedReader(new FileReader("PoolTable.txt"));
-        while((line=br.readLine())!=null) {
-            poolTable.add(Integer.parseInt(line));
-        }
     }
 
     public String getMachineCode() throws IOException {
         String line;
+        StringBuilder sb = new StringBuilder();
         BufferedReader br = new BufferedReader(new FileReader("IC.txt"));
         while((line = br.readLine()) != null) {
             String[] parts = line.split("\\s+");
-            for (String part : parts) {
-                System.out.print(part + " ");
+            if(parts[0].contains("AD") || parts[0].equals("(DL,01)")) {
+                sb.append("__ __ ____");
+            }else if(parts.length == 1) {
+//                if(parts[0].contains("IS")) {
+                    sb.append(getCode(parts[0])).append(" 00 0000");
+//                }
+            }else if(parts.length == 2) {
+                if(parts[0].contains("IS")) {
+                    int i = Integer.parseInt(getCode(parts[1]));
+                    sb.append(getCode(parts[0])).append(" 00").append(" ").append(symbolTable.get(i-1).getAddress());
+                }else if(parts[0].equals("(DL,02)")) {
+                    sb.append("00 00 000").append(getCode(parts[1]));
+                }
+            }else {
+                int i = Integer.parseInt(getCode(parts[2]));
+                sb.append(getCode(parts[0])).append(" ").append(getCode(parts[1])).append(" ");
+                if(parts[2].contains("L")) {
+                    sb.append(literalTable.get(i-1).getAddress());
+                }
+                else if(parts[2].contains("S")) {
+                    sb.append(symbolTable.get(i-1).getAddress());
+                }
             }
-            System.out.println();
+            sb.append("\n");
         }
-        return "boku wa tobi";
+        return sb.toString();
     }
 
-    public String getSymbolTable() {
-        StringBuilder temp = new StringBuilder();
-        temp.append("\n**********************SYMBOL TABLE**********************\n");
-        temp.append("Index\tSymbol\tAddress\n");
-        for(TableRow tableRow : symbolTable) {
-            String symbol = tableRow.getSymbol();
-            int address = tableRow.getAddress();
-            int index = tableRow.getIndex();
-            temp.append(index).append("\t\t").append(symbol).append("\t\t").append(address).append("\n");
-        }
-        return temp.toString();
+
+    private String getCode(String s) {
+        String[] parts = s.split(",");
+        parts[1] = parts[1].replace(")","");
+        return parts[1];
     }
 
-    public String getLiteralTable() {
-        StringBuilder temp = new StringBuilder();
-        temp.append("\n**********************LITERAL TABLE**********************\n");
-        temp.append("Index\tLiteral\tAddress\n");
-        for(TableRow tableRow : literalTable) {
-            String symbol = tableRow.getSymbol();
-            int address = tableRow.getAddress();
-            int index = tableRow.getIndex();
-            temp.append(index).append("\t\t").append(symbol).append("\t\t").append(address).append("\n");
-        }
-        return temp.toString();
-    }
-
-    public String getPoolTable() {
-        StringBuilder temp = new StringBuilder();
-        temp.append("\n**********************POOL TABLE**********************\n");
-        temp.append("Index\n");
-        for(Integer i : poolTable) {
-            temp.append(i).append("\n");
-        }
-        return temp.toString();
-    }
 }
