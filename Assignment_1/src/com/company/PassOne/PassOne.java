@@ -65,7 +65,7 @@ public class PassOne {
             if(parts[1].equals("LTORG")) {
                 int ptr = poolTable.get(poolTable_pnt);
                 for(int j = ptr; j<literalTable_pnt; j++) {
-                    sb.append(InstanceTable.getCode(parts[1])).append(InstanceTable.getCode("DC")).append("(C,").append(literalTable.get(j).getSymbol()).append(")");
+                    sb.append(InstanceTable.getCode("DC")).append("(C,").append(literalTable.get(j).getSymbol()).append(")");
                     if(j != literalTable_pnt-1) {
                         sb.append("\n");
                     }
