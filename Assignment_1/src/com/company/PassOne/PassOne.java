@@ -39,7 +39,6 @@ public class PassOne {
     public void parseFile(String s) throws IOException {
         String line;
         BufferedReader br = new BufferedReader(new FileReader(s));
-        InstanceTable lookUp = new InstanceTable();
 
         while((line = br.readLine()) != null) {
             line = line.toUpperCase();
@@ -51,22 +50,22 @@ public class PassOne {
                 }else {
                     symbolTable.put(parts[0],new TableRow(parts[0], locCounter, ++symbolIndex));
                 }
-                sb.append("(S,").append(symbolTable.get(parts[0]).getIndex()).append(") ");
+//                sb.append("(S,").append(symbolTable.get(parts[0]).getIndex()).append(") ");
             }
             if(parts[1].equals("START")) {
                 locCounter = expr(parts[2]);
-                sb.append(lookUp.getCode(parts[1]));
+                sb.append(InstanceTable.getCode(parts[1]));
                 sb.append("(C,").append(locCounter).append(") ");
             }
             if(parts[1].equals("ORIGIN")) {
                 locCounter = expr(parts[2]);
-                sb.append(lookUp.getCode(parts[1]));
+                sb.append(InstanceTable.getCode(parts[1]));
                 sb.append("(C,").append(locCounter).append(") ");
             }
             if(parts[1].equals("LTORG")) {
                 int ptr = poolTable.get(poolTable_pnt);
                 for(int j = ptr; j<literalTable_pnt; j++) {
-                    sb.append(lookUp.getCode(parts[1])).append(lookUp.getCode("DC")).append("(C,").append(literalTable.get(j).getSymbol()).append(")");
+                    sb.append(InstanceTable.getCode(parts[1])).append(InstanceTable.getCode("DC")).append("(C,").append(literalTable.get(j).getSymbol()).append(")");
                     if(j != literalTable_pnt-1) {
                         sb.append("\n");
                     }
@@ -83,16 +82,16 @@ public class PassOne {
                 if(parts[2].contains("+"))
                 {
                     String[] splits =parts[2].split("\\+");
-                    sb.append(lookUp.getCode(parts[1])).append("(S,").append(symbolTable.get(splits[0]).getIndex()).append(")+").append(splits[1]);
+                    sb.append(InstanceTable.getCode(parts[1])).append("(S,").append(symbolTable.get(splits[0]).getIndex()).append(")+").append(splits[1]);
                 }
                 else if(parts[2].contains("-"))
                 {
                     String[] splits =parts[2].split("\\-");
-                    sb.append(lookUp.getCode(parts[1])).append("(S,").append(symbolTable.get(splits[0]).getIndex()).append(")-").append(splits[1]);
+                    sb.append(InstanceTable.getCode(parts[1])).append("(S,").append(symbolTable.get(splits[0]).getIndex()).append(")-").append(splits[1]);
                 }
                 else
                 {
-                    sb.append(lookUp.getCode(parts[1])).append("(C,").append(parts[2]);
+                    sb.append(InstanceTable.getCode(parts[1])).append("(C,").append(parts[2]);
                 }
                 if(symbolTable.containsKey(parts[0]))
                     symbolTable.put(parts[0], new TableRow(parts[0],loc,symbolTable.get(parts[0]).getIndex())) ;
@@ -101,21 +100,21 @@ public class PassOne {
                 ++locCounter;
             }
             if(parts[1].equals("DS")) {
-                sb.append(lookUp.getCode(parts[1])).append("(C,").append(parts[2]).append(") ");
+                sb.append(InstanceTable.getCode(parts[1])).append("(C,").append(parts[2]).append(") ");
                 locCounter = locCounter + Integer.parseInt(parts[2]);
             }
             if(parts[1].equals("DC")) {
                 ++locCounter;
                 int constant = Integer.parseInt(parts[2].replace("'",""));
-                sb.append(lookUp.getCode(parts[1])).append("(C,").append(constant).append(") ");
+                sb.append(InstanceTable.getCode(parts[1])).append("(C,").append(constant).append(") ");
             }
-            if(lookUp.getType(parts[1]).equals("IS")) {
-                sb.append(lookUp.getCode(parts[1]));
+            if(InstanceTable.getType(parts[1]).equals("IS")) {
+                sb.append(InstanceTable.getCode(parts[1]));
                 int j = 2;
                 while(j < parts.length) {
                     parts[j]=parts[j].replace(",", "");
-                    if(lookUp.getType(parts[j]).equals("RG")) {
-                        sb.append(lookUp.getCode(parts[j]));
+                    if(InstanceTable.getType(parts[j]).equals("RG") || InstanceTable.getType(parts[j]).equals("CC")) {
+                        sb.append(InstanceTable.getCode(parts[j]));
                     }
                     else {
                         if(parts[j].contains("=")) {
@@ -141,14 +140,16 @@ public class PassOne {
                 int ptr = poolTable.get(poolTable_pnt);
                 if(ptr != literalTable_pnt) {
                     for(int j = ptr; j<literalTable_pnt; j++) {
-                        sb.append(lookUp.getCode("LTORG")).append(lookUp.getCode("DC")).append("(C,").append(literalTable.get(j).getSymbol()).append(")\n");
+                        sb.append(InstanceTable.getCode("LTORG")).append(InstanceTable.getCode("DC")).append("(C,").append(literalTable.get(j).getSymbol()).append(")\n");
                         literalTable.get(j).setAddress(locCounter);
                         ++locCounter;
                     }
                     poolTable_pnt++;
                     poolTable.add(literalTable_pnt);
+                }else {
+                    poolTable.remove(poolTable_pnt);
                 }
-                sb.append(lookUp.getCode(parts[1]));
+                sb.append(InstanceTable.getCode(parts[1]));
             }
             sb.append("\n");
         }
@@ -175,7 +176,7 @@ public class PassOne {
     public String getLiteralTable() {
         StringBuilder temp = new StringBuilder();
         temp.append("\n**********************LITERAL TABLE**********************\n");
-        temp.append("Index\tSymbol\tAddress\n");
+        temp.append("Index\tLiteral\tAddress\n");
         for(TableRow tableRow : literalTable) {
             String symbol = tableRow.getSymbol();
             int address = tableRow.getAddress();

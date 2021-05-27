@@ -8,7 +8,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         PassOne passOne = new PassOne();
-        passOne.parseFile("input1.asm");
+        passOne.parseFile("input4.asm");
 
         System.out.println(passOne.getIC());
         System.out.println(passOne.getSymbolTable());

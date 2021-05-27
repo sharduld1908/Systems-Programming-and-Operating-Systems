@@ -3,14 +3,13 @@ package com.company.support;
 import java.util.HashMap;
 
 public class InstanceTable {
-    private static HashMap<String,String> AD;
-    private static HashMap<String,String> RG;
-    private static HashMap<String,String> IS;
-    private static HashMap<String,String> CC;
-    private static HashMap<String,String> DL;
+    private static final HashMap<String,String> AD;
+    private static final HashMap<String,String> RG;
+    private static final HashMap<String,String> IS;
+    private static final HashMap<String,String> CC;
+    private static final HashMap<String,String> DL;
 
-    public InstanceTable() {
-        //Initialize HashMaps
+    static {
         AD = new HashMap<>();
         RG = new HashMap<>();
         IS = new HashMap<>();
@@ -21,14 +20,15 @@ public class InstanceTable {
         IS.put("STOP","01");
         IS.put("ADD","02");
         IS.put("SUB","03");
-        IS.put("MULTI","04");
+        IS.put("MUL","04");
         IS.put("MOVER","05");
         IS.put("MOVEM","06");
-        IS.put("COMB","07");
+        IS.put("COMP","07");
         IS.put("BC","08");
         IS.put("DIV","09");
         IS.put("READ","10");
         IS.put("PRINT","11");
+        IS.put("STORE","12");
 
         AD.put("START","01");
         AD.put("END","02");
@@ -52,7 +52,7 @@ public class InstanceTable {
         CC.put("NE","06");
     }
 
-    public String getType(String s) {
+    public static String getType(String s) {
         s = s.toUpperCase();
 
         if(IS.containsKey(s)) {
@@ -70,7 +70,7 @@ public class InstanceTable {
         }
     }
 
-    public String getCode(String s) {
+    public static String getCode(String s) {
         s = s.toUpperCase();
 
         if(IS.containsKey(s)) {
@@ -82,7 +82,7 @@ public class InstanceTable {
         }else if(RG.containsKey(s)) {
             return "(RG,"+RG.get(s)+") ";
         }else if(CC.containsKey(s)){
-            return "(RG,"+CC.get(s)+") ";
+            return "(CC,"+CC.get(s)+") ";
         }else {
             return "-01";
         }
