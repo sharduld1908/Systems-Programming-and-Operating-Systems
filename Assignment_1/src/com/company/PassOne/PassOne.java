@@ -144,8 +144,8 @@ public class PassOne {
                         literalTable.get(j).setAddress(locCounter);
                         ++locCounter;
                     }
-                    poolTable_pnt++;
-                    poolTable.add(literalTable_pnt);
+//                    poolTable_pnt++;
+//                    poolTable.add(literalTable_pnt);
                 }else {
                     poolTable.remove(poolTable_pnt);
                 }
