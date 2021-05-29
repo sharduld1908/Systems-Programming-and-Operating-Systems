@@ -52,6 +52,11 @@ public class PassTwo {
                     else if(parts[1].contains("S")) {
                         sb.append(getCode(parts[0])).append(" 00").append(" ").append(symbolTable.get(i-1).getAddress());
                     }
+                    else if(parts[1].contains("C")) {
+                        sb.append(getCode(parts[0])).append(" 00 00").append(getCode(getCode(parts[1])));
+                    }else if(parts[1].contains("RG")) {
+                        sb.append(getCode(parts[0])).append(getCode(parts[1])).append(" 0000");
+                    }
                 }else if(parts[0].equals("(DL,02)")) {
                     sb.append("00 00 000").append(getCode(parts[1]));
                 }
@@ -65,8 +70,9 @@ public class PassTwo {
                 }
                 else if(parts[2].contains("S")) {
                     sb.append(symbolTable.get(i-1).getAddress());
+                }else if(parts[2].contains("C")) {
+                    sb.append(getCode(getCode(parts[2])));
                 }
-
             }
             sb.append("\n");
         }
