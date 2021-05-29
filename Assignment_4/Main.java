@@ -14,17 +14,17 @@ class Main{
         System.out.println("Hi " + s);
 
         if(db > 50) {
-            System.out.println("db is greater than fifty and db is equal to " + db);
+            System.out.println("db is greater than 50 & db = " + db);
         } 
         else if(db == 50) {
-	     System.out.println("db is equal to fifty and db is equal to " + db);
+	     System.out.println("db is equal to 50 & db = " + db);
         }
         else {
-            System.out.println("db is lesser than to fifty and db is equal to " + db);
+            System.out.println("db is lesser than 50 & db = " + db);
         }
 
         for(int j = 0;j<i;++j) {
-            System.out.println("j is equal to " + j) ;
+            System.out.println("j = " + j) ;
         }
     }
 }

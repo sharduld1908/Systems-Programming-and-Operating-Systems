@@ -7,7 +7,7 @@ import java.io.*;	 ==> IMPORT_STATEMENT
 class			 ==> KEYWORD
 Main			 ==> IDENTIFIER
 {			 ==> OPENING BLOCK
-private	 	 	 ==> ACCESS_OPERATOR
+private			 ==> ACCESS_OPERATOR
 String			 ==> DATATYPE
 s			 ==> IDENTIFIER
 ;			 ==> SEMICOLON
@@ -57,14 +57,13 @@ db			 ==> IDENTIFIER
 System.out.println	 ==> PRINTING_STATEMENT
 (			 ==> OPENING BRACKET
 "db is greater than
-fifty and db is equal
-to "	 		 ==> STRING_CONSTANT
+ 50 & db = "	 	 ==> STRING_CONSTANT
 +			 ==> ARITHMETIC_OPERATOR
 db			 ==> IDENTIFIER
 )			 ==> CLOSING BRACKET
 ;			 ==> SEMICOLON
 }			 ==> CLOSING BLOCK
-else if		 	 ==> CONDITIONAL
+else if			 ==> CONDITIONAL
 (			 ==> OPENING BRACKET
 db			 ==> IDENTIFIER
 ==			 ==> LOGICAL_OPERATOR
@@ -73,9 +72,8 @@ db			 ==> IDENTIFIER
 {			 ==> OPENING BLOCK
 System.out.println	 ==> PRINTING_STATEMENT
 (			 ==> OPENING BRACKET
-"db is equal to 
-fifty and db is
- equal to "	 	 ==> STRING_CONSTANT
+"db is equal to 50
+ & db = "	 	 ==> STRING_CONSTANT
 +			 ==> ARITHMETIC_OPERATOR
 db			 ==> IDENTIFIER
 )			 ==> CLOSING BRACKET
@@ -86,8 +84,7 @@ else			 ==> CONDITIONAL
 System.out.println	 ==> PRINTING_STATEMENT
 (			 ==> OPENING BRACKET
 "db is lesser than
-to fifty and db
-is equal to "	 	 ==> STRING_CONSTANT
+ 50 & db = "	 	 ==> STRING_CONSTANT
 +			 ==> ARITHMETIC_OPERATOR
 db			 ==> IDENTIFIER
 )			 ==> CLOSING BRACKET
@@ -110,7 +107,7 @@ j			 ==> IDENTIFIER
 {			 ==> OPENING BLOCK
 System.out.println	 ==> PRINTING_STATEMENT
 (			 ==> OPENING BRACKET
-"j is equal to "	 ==> STRING_CONSTANT
+"j = "	 		 ==> STRING_CONSTANT
 +			 ==> ARITHMETIC_OPERATOR
 j			 ==> IDENTIFIER
 )			 ==> CLOSING BRACKET
@@ -118,4 +115,5 @@ j			 ==> IDENTIFIER
 }			 ==> CLOSING BLOCK
 }			 ==> CLOSING BLOCK
 }			 ==> CLOSING BLOCK
+
 

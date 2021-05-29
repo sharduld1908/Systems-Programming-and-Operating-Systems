@@ -7,7 +7,7 @@ DIGIT [0-9]
 NUMBER {DIGIT}*
 REAL {NUMBER}+[.]{NUMBER}+
 TEXT [A-Za-z]
-STRING_CONSTANT "\""[A-Za-z ]*"\""
+STRING_CONSTANT "\""[A-Za-z 0-9=:-_!@#$%^&*()+/]*"\""
 IMPORT_STATEMENT "import"[^\n]*";"
 KEYWORDS "class"|"abstract"|"interface"|"static"|"implements"|"extends"
 CONDITIONALS "if"|"else"|"else if"|"switch"|"case"
