@@ -215,7 +215,7 @@ System.out.println	 ==> PRINTING_STATEMENT
 
 "j = "	 		 ==> STRING_CONSTANT
 
-+			 ==> ARITHMETIC_OPERATOR
+\+			 ==> ARITHMETIC_OPERATOR
 
 j			 ==> IDENTIFIER
 
