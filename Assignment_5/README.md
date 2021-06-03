@@ -4,6 +4,7 @@ To execute c program:   gcc lex.yy.c
 
 To execute a.out: 	 ./a.out sample.java
 
+OUTPUT:
 
 The no. of lines in the file = 8
 
