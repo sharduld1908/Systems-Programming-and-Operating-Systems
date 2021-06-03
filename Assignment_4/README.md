@@ -102,8 +102,8 @@ if			 ==> CONDITIONAL
 
 db			 ==> IDENTIFIER
 
->			 ==> LOGICAL_OPERATOR
->			 
+\>			 ==> LOGICAL_OPERATOR
+			 
 50			 ==> CONSTANT
 
 )			 ==> CLOSING BRACKET
@@ -117,7 +117,7 @@ System.out.println	 ==> PRINTING_STATEMENT
 "db is greater than
  50 & db = "	 	 ==> STRING_CONSTANT
  
-+			 ==> ARITHMETIC_OPERATOR
+\+			 ==> ARITHMETIC_OPERATOR
 	 
 db			 ==> IDENTIFIER
 
@@ -148,7 +148,7 @@ System.out.println	 ==> PRINTING_STATEMENT
 "db is equal to 50
  & db = "	 	 ==> STRING_CONSTANT
  
-+			 ==> ARITHMETIC_OPERATOR
+\+			 ==> ARITHMETIC_OPERATOR
 
 db			 ==> IDENTIFIER
 
@@ -169,7 +169,7 @@ System.out.println	 ==> PRINTING_STATEMENT
 "db is lesser than
  50 & db = "	 	 ==> STRING_CONSTANT
  
-+			 ==> ARITHMETIC_OPERATOR
+\+			 ==> ARITHMETIC_OPERATOR
 
 db			 ==> IDENTIFIER
 
