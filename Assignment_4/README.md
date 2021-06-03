@@ -88,7 +88,7 @@ System.out.println	 ==> PRINTING_STATEMENT
 
 "Hi "	 		 ==> STRING_CONSTANT
 
-+			 ==> ARITHMETIC_OPERATOR
+\+			 ==> ARITHMETIC_OPERATOR
 
 s			 ==> IDENTIFIER
 
