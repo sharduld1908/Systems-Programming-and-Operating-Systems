@@ -1,5 +1,4 @@
 To execute lex program: lex assignment_5.l
-
 To execute c program:   gcc lex.yy.c
 
 To execute a.out: 	 ./a.out sample.java
