@@ -35,26 +35,23 @@
 
 #### **********************SYMBOL TABLE**********************
 
-Index	Symbol	Address
-
-1		N		1011
-
-2		TR		1032
-
-3		A		1003
-
-4		RG		1012
+Index |	Symbol | Address |
+--- | --- | --- |
+1 | N | 1011 |
+2 | TR | 1032 |
+3 | A | 1003 |
+4 | RG | 1012 |
 
 
 #### **********************LITERAL TABLE**********************
 
-Index	Literal	Address
-
-1		1		1008
+Index | Literal |	Address |
+--- | --- | --- |
+1 | 1 | 1008 |
 
 
 #### **********************POOL TABLE**********************
 
-Index
-
-0
+Index |
+--- |
+0 |
